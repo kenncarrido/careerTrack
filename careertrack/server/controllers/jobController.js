@@ -33,7 +33,31 @@ const createJob = async (req, res) => {
   }
 };
 
+const updateJob = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { company, position, status } = req.body;
+
+    try {
+        const job = await prisma.job.update({
+            where: { id },
+            data: {
+                company,
+                position,
+                status,
+            },
+        });
+
+        res.json(job);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Something went wrong.",
+        });
+    }
+};
+
 module.exports = {
   getJobs,
   createJob,
+  updateJob,
 };
