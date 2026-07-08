@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.use("/api/jobs", jobRoutes);
 
+
 const PORT = 5000;
 
 app.listen(PORT, () => {

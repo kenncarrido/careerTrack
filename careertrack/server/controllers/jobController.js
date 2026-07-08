@@ -56,8 +56,26 @@ const updateJob = async (req, res) => {
     }
 };
 
+const deleteJob = async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    try {
+        const job = await prisma.job.delete({
+            where: { id },
+        });
+
+        res.json(job);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Something went wrong.",
+        });
+    }
+};
+
 module.exports = {
   getJobs,
   createJob,
   updateJob,
+  deleteJob,
 };
